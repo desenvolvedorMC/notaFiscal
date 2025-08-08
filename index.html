@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>notaFiscal</title>
+</head>
+<body>
+
+
+<style>
+        * {
+            margin: 5px;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+
+.dados {
+            width: 300px;
+            float: left;
+        }
+
+
+.print {
+            width: 300px;
+            float: right;
+            border: 1px solid black;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: aqua;
+            display: none;
+        }
+
+        @media print {
+            .print {
+                display: block;
+            }
+            .dados {
+                display: none;
+            }
+        }
+
+
+.assinatura {
+            margin-top: 50px;
+            border-top: 1px solid black;
+            text-align: center;
+        }
+
+
+</style>
+
+
+    <div class="dados"> 
+        Emitente: <br/>
+        <input type="text" id="emitente"/> <br/><br/>
+        Recebido: <br/>
+        <input type="text" id="recebido"/> <br/><br/>
+         Valor: <br/>
+        <input type="number" step="0.01" id="valor"/> <br/><br/>
+        <button onclick="salvar()">salvar</button>
+    </div>
+
+    <div class="print">
+        <h1>Emitente <span id="emitente2"></span></h1>
+        <p>Recebido <span id="recebido2"></span></p>
+        <h2>Valor: <span id="valor2"></h2>
+        <p>Data <span id="data2"></span></p>
+        <div class="assinatura">Assinatura</div>
+    </div>
+
+    <script>
+        function salvar() {
+        document.getElementById("emitente2").innerHTML = document.getElementById("emitente").value;
+        document.getElementById("recebido2").innerHTML = document.getElementById("recebido").value;
+        document.getElementById("valor2").innerHTML = parseFloat(document.getElementById("valor").value).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById("data2").innerHTML = dataAtual();
+        window.print();
+        }
+
+
+        function dataAtual() {
+            let Data = new Date();
+            return Data.getDate() + "/" + (Data.getMonth() + 1) + "/" + Data.getFullYear();}       
+    </script>
+
+</body>
+</html>
